@@ -7,7 +7,6 @@ import type { AppProps } from "next/app"
 import { DefaultSeo } from "next-seo"
 import type { FC } from "react"
 import React, { useMemo } from "react"
-import RootLayout from "@/components/layout"
 import { siteConfig } from "@/config/site"
 
 // Use require instead of import since order matters
@@ -44,9 +43,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
       <ConnectionProvider endpoint={endpoint}>
         <WalletProvider wallets={wallets} autoConnect>
           <WalletModalProvider>
-            <RootLayout>
-              <Component {...pageProps} />
-            </RootLayout>
+            <Component {...pageProps} />
           </WalletModalProvider>
         </WalletProvider>
       </ConnectionProvider>

@@ -4,7 +4,7 @@ import { cn } from "@/utils/cn"
 import { forwardRefWithAs } from "@/utils/render"
 
 const typographyVariants = tv({
-  base: "leading-snug",
+  base: "leading-normal",
   variants: {
     level: {
       h1: "text-7xl font-semibold",
@@ -26,6 +26,7 @@ const typographyVariants = tv({
       success: "text-success-500",
       error: "text-error-500",
       secondary: "text-gray-600",
+      book: "text-gray-700",
     },
   },
   defaultVariants: {

@@ -1,20 +1,23 @@
-import React from "react"
 import { tv, VariantProps } from "tailwind-variants"
+import React from "react"
 import { cn } from "@/utils/cn"
 import { forwardRefWithAs } from "@/utils/render"
 
 export const buttonVariants = tv({
   base: [
-    "inline-flex items-center justify-center rounded-lg shadow-z1 text-sm font-semibold transition-colors",
+    "inline-flex items-center justify-center rounded-lg text-sm font-semibold transition-colors",
     "focus:outline-none focus:ring-4",
     "disabled:pointer-events-none",
     "active:scale-95",
   ],
   variants: {
     variant: {
-      solid: ["bg-primary-400 text-white", "hover:bg-primary-600", "focus:ring-primary-100", "disabled:bg-primary-200"],
+      solid: [
+        // "bg-primary-400 text-white", "hover:bg-primary-600", "focus:ring-primary-100", "disabled:bg-primary-200"
+        "shadow-z1",
+      ],
       outline: [
-        "text-primary-400 border border-primary-400",
+        "text-primary-400 border border-primary-400 shadow-z1",
         "focus:ring-primary-100",
         "disabled:text-primary-300 disabled:border-primary-200",
       ],
@@ -29,14 +32,54 @@ export const buttonVariants = tv({
       md: "h-10 px-2.5 text-sm",
       lg: "h-11 px-2.5 text-base",
     },
+    scheme: {
+      default: "",
+      primary: "",
+      info: "",
+      success: "",
+      warning: "",
+      error: "",
+    },
     fullWidth: {
       true: "w-full",
     },
   },
+  compoundVariants: [
+    {
+      variant: "solid",
+      scheme: "default",
+      className: "bg-gray-800 text-white",
+    },
+    {
+      variant: "solid",
+      scheme: "primary",
+      className: "bg-primary-400 text-white hover:bg-primary-600 focus:ring-primary-100 disabled:bg-primary-200",
+    },
+    {
+      variant: "solid",
+      scheme: "success",
+      className: "bg-success-400 text-white hover:bg-sucess-600 focus:ring-sucess-100 disabled:bg-sucess-200",
+    },
+    {
+      variant: "solid",
+      scheme: "info",
+      className: "bg-info-400 text-white hover:bg-info-600 focus:ring-info-100 disabled:bg-info-200",
+    },
+    {
+      variant: "solid",
+      scheme: "warning",
+      className: "bg-warning-400 text-white hover:bg-warning-600 focus:ring-warning-100 disabled:bg-warning-200",
+    },
+    {
+      variant: "solid",
+      scheme: "error",
+      className: "bg-error-400 text-white hover:bg-error-600 focus:ring-error-100 disabled:bg-error-200",
+    },
+  ],
   defaultVariants: {
     variant: "solid",
+    scheme: "default",
     size: "md",
-    fullWidth: false,
   },
 })
 
@@ -61,6 +104,7 @@ export const Button = forwardRefWithAs<"button", ButtonProps>(
       startDecorator,
       endDecorator,
       disabled: disabledProp,
+      scheme,
       ...props
     },
     ref
@@ -86,7 +130,7 @@ export const Button = forwardRefWithAs<"button", ButtonProps>(
 
     return (
       <Tag
-        className={cn(buttonVariants({ variant, size, fullWidth, className }))}
+        className={cn(buttonVariants({ variant, size, fullWidth, className, scheme }))}
         ref={ref}
         disabled={disabled}
         {...props}
